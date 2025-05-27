@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+  --primary-color: #ff00ff;
+  --secondary-color: #00ffff;
+  --accent-color: #ffff00;
+  --background-color: #000000;
+  --text-color: #ffffff;
+  --glow-color: rgba(255, 0, 255, 0.7);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Press Start 2P', cursive;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background-color: #111;
+  color: var(--text-color);
+  height: 100vh;
+  width: 100vw;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at center, #1a1a2e 0%, #000000 100%);
+  padding: 0;
+  margin: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.97; }
+  5% { opacity: 0.9; }
+  10% { opacity: 0.97; }
+  15% { opacity: 1; }
+  50% { opacity: 0.95; }
+  95% { opacity: 0.96; }
+  100% { opacity: 0.95; }
+}
+
+.neon-text {
+  color: var(--text-color);
+  text-shadow: 
+    0 0 5px var(--glow-color),
+    0 0 10px var(--glow-color),
+    0 0 20px var(--glow-color),
+    0 0 40px var(--primary-color);
+}
+
+/* Universal Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 8px var(--glow-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-color);
+  box-shadow: 0 0 12px var(--secondary-color);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  * {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  * {
+    font-size: 12px;
+  }
+}

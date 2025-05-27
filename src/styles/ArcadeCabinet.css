@@ -1,0 +1,372 @@
+.arcade-cabinet {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background-color: #2e2e2e;
+  box-shadow: 
+    0 0 10px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(255, 0, 255, 0.3),
+    0 0 30px rgba(0, 255, 255, 0.2);
+  position: relative;
+}
+
+.cabinet-top {
+  background-color: #1a1a1a;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 4px solid #3d3d3d;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.cabinet-title {
+  color: #ff00ff;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0;
+  text-shadow: 
+    0 0 5px rgba(255, 0, 255, 0.7),
+    0 0 10px rgba(255, 0, 255, 0.5),
+    0 0 15px rgba(255, 0, 255, 0.3);
+  animation: neon-pulse 1.5s infinite alternate;
+}
+
+.screen-container {
+  flex: 1;
+  padding: 20px;
+  background-color: #252525;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 0;
+}
+
+.screen-bezel {
+  width: 100%;
+  height: 100%;
+  background-color: #111;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.screen {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  border-radius: 5px;
+  position: relative;
+  overflow-y: auto;
+  box-shadow: 
+    0 0 10px rgba(0, 255, 255, 0.3),
+    0 0 20px rgba(255, 0, 255, 0.2);
+}
+
+.screen::-webkit-scrollbar {
+  width: 12px;
+}
+
+.screen::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.screen::-webkit-scrollbar-thumb {
+  background: #ff00ff;
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 8px rgba(255, 0, 255, 0.7);
+}
+
+.screen::-webkit-scrollbar-thumb:hover {
+  background: #00ffff;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.7);
+}
+
+.screen-content {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.03) 50%,
+    rgba(0, 0, 0, 0.1) 50%
+  );
+  background-size: 100% 4px;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.screen-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0 0 30px rgba(0, 255, 255, 0.3);
+  z-index: 4;
+  pointer-events: none;
+  animation: glow 4s infinite alternate;
+}
+
+.cabinet-controls {
+  height: 120px;
+  background-color: #1a1a1a;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 15px;
+  border-top: 4px solid #3d3d3d;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+}
+
+.joystick {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.joystick-base {
+  width: 60px;
+  height: 60px;
+  background-color: #333;
+  border-radius: 50%;
+  box-shadow: 
+    inset 0 0 10px rgba(0, 0, 0, 0.7),
+    0 0 5px rgba(255, 255, 255, 0.1);
+  position: absolute;
+}
+
+.joystick-stick {
+  width: 20px;
+  height: 40px;
+  background-color: #d00;
+  border-radius: 10px;
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 
+    inset 0 -4px 5px rgba(0, 0, 0, 0.5),
+    0 2px 4px rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(255, 255, 255, 0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.button:hover::after {
+  opacity: 1;
+}
+
+.button:active {
+  transform: scale(0.95) translateY(2px);
+}
+
+.button-red {
+  background-color: #f00;
+  box-shadow: 
+    inset 0 -4px 5px rgba(0, 0, 0, 0.5),
+    0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+.button-blue {
+  background-color: #00f;
+  box-shadow: 
+    inset 0 -4px 5px rgba(0, 0, 0, 0.5),
+    0 0 10px rgba(0, 0, 255, 0.5);
+}
+
+.button-icon {
+  color: white;
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
+}
+
+.button-labels {
+  display: flex;
+  gap: 32px;
+}
+
+.button-label {
+  color: #fff;
+  font-size: 0.6rem;
+  text-shadow: 
+    0 0 5px rgba(255, 255, 255, 0.7),
+    0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes neon-pulse {
+  0% {
+    text-shadow: 
+      0 0 5px rgba(255, 0, 255, 0.7),
+      0 0 10px rgba(255, 0, 255, 0.5),
+      0 0 15px rgba(255, 0, 255, 0.3);
+  }
+  100% {
+    text-shadow: 
+      0 0 10px rgba(255, 0, 255, 0.9),
+      0 0 20px rgba(255, 0, 255, 0.7),
+      0 0 30px rgba(255, 0, 255, 0.5);
+  }
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: inset 0 0 30px rgba(0, 255, 255, 0.3);
+  }
+  50% {
+    box-shadow: inset 0 0 30px rgba(255, 0, 255, 0.3);
+  }
+  100% {
+    box-shadow: inset 0 0 30px rgba(0, 255, 255, 0.3);
+  }
+}
+
+/* Touch-friendly styles */
+@media (hover: none) {
+  .button::after {
+    display: none;
+  }
+  
+  .button:active {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .cabinet-title {
+    font-size: 1.2rem;
+  }
+  
+  .cabinet-controls {
+    height: 100px;
+  }
+  
+  .joystick {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .joystick-base {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .joystick-stick {
+    width: 15px;
+    height: 30px;
+    top: 10px;
+    left: 17.5px;
+  }
+  
+  .button {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .button-label {
+    font-size: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cabinet-title {
+    font-size: 1rem;
+  }
+  
+  .screen-content {
+    padding: 10px;
+  }
+  
+  .cabinet-controls {
+    height: 80px;
+  }
+  
+  .joystick, .joystick-base {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .joystick-stick {
+    width: 12px;
+    height: 25px;
+    top: 7.5px;
+    left: 14px;
+  }
+  
+  .button {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .button-icon {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .button-label {
+    font-size: 0.45rem;
+  }
+  
+  .buttons {
+    gap: 15px;
+  }
+  
+  .button-labels {
+    gap: 24px;
+  }
+}
